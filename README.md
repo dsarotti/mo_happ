@@ -19,6 +19,8 @@ I created this app to provide a hands-on experience for users to:
 4. The user can choose to **stick with their initial choice** or **switch to the remaining door**.
 5. The app tracks the outcomes over multiple attempts to show the success rate of each strategy.
 
+Currently, there's a branch called autopilot that features an option to automatize the process so the user can just press a button and see how the statistics change after many tries.
+
 ## Features
 
 - **Interactive Door Selection**: Choose one of three doors with a clear and intuitive interface.
