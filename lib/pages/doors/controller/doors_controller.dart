@@ -16,7 +16,8 @@ class DoorsController extends GetxController {
 
   //Autopilot related
   var stopAutopilot = true;
-  var autopilotSwitchDoors = false; //Whether or not the autopilot will choose to switch doors after a goat door is revealed
+  var autopilotSpeed = 100.obs; // In milliseconds
+  var autopilotChoice = false.obs; // False means no switch, True means switch
 
   void startNewAttempt() {
     finishedAttempt.value = false;
@@ -61,25 +62,30 @@ class DoorsController extends GetxController {
 
   double get failureRate => totalAttempts.value > 0 ? (incorrectAttempts.value / totalAttempts.value) : 0.0;
 
+  void startAutopilot() {
+    stopAutopilot = false;
+    autopilot();
+  }
+
   Future<void> autopilot() async {
     while (!stopAutopilot) {
       //Start new attempt to clear the status
       startNewAttempt();
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: autopilotSpeed.value));
 
       userSelectDoor(Random().nextInt(3) + 1);
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: autopilotSpeed.value));
 
       revealNonPrizeDoor();
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: autopilotSpeed.value));
 
-      if (autopilotSwitchDoors) {
+      if (autopilotChoice.value) {
         userChangeChoice();
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(Duration(milliseconds: autopilotSpeed.value));
       }
 
       finalizeChoice();
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: autopilotSpeed.value));
     }
   }
 

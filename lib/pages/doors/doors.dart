@@ -16,7 +16,7 @@ class Doors extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top:8.0),
+        padding: const EdgeInsets.only(top: 8.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -62,50 +62,149 @@ class Doors extends StatelessWidget {
               const SizedBox(height: 10),
               Expanded(
                 child: Obx(
-                  () => Column(
-                    children: [
-                      if (controller.userChoice.value != 0 && !controller.isRevealed.value && !controller.finishedAttempt.value) ...[
-                        ElevatedButton(
-                          onPressed: () {
-                            controller.revealNonPrizeDoor();
-                          },
-                          child: const Text("Reveal a Door"),
+                  () => controller.stopAutopilot
+                      ? Column(
+                          children: [
+                            if (controller.userChoice.value == 0) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                  Get.dialog(
+                                    AlertDialog(
+                                      title: const Text('Settings'),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Speed (10 - 1500ms)',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          Obx(
+                                            () => Slider(
+                                              value: controller.autopilotSpeed.value.toDouble(),
+                                              min: 10,
+                                              // Velocidad mínima
+                                              max: 1500,
+                                              // Velocidad máxima
+                                              divisions: 15,
+                                              // Pasos de 100 ms
+                                              label: '${controller.autopilotSpeed.value} ms',
+                                              onChanged: (value) {
+                                                controller.autopilotSpeed.value = value.toInt(); // Actualizar el valor local del Slider
+                                              },
+                                            ),
+                                          ),
+                                          const Text(
+                                            'Choice',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Obx(() {
+                                                controller.autopilotChoice.value;
+                                                return ElevatedButton(
+                                                  onPressed: () {
+                                                    controller.autopilotChoice.value = true;
+                                                  },
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.blue : Colors.white),
+                                                    foregroundColor:
+                                                        WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.white : Colors.blue),
+                                                  ),
+                                                  child: const Text('Switch'),
+                                                );
+                                              }),
+                                              Expanded(
+                                                child: SizedBox(),
+                                              ),
+                                              Obx(() {
+                                                controller.autopilotChoice.value;
+                                                return ElevatedButton(
+                                                  onPressed: () {
+                                                    controller.autopilotChoice.value = false;
+                                                  },
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.white : Colors.blue),
+                                                    foregroundColor:
+                                                        WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.blue : Colors.white),
+                                                  ),
+                                                  child: const Text("Don't switch"),
+                                                );
+                                              }),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      actions: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            controller.startAutopilot();
+                                            Get.back();
+                                          },
+                                          child: const Text('Accept'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                child: const Text("start autopilot"),
+                              ),
+                            ],
+                            if (controller.userChoice.value != 0 && !controller.isRevealed.value && !controller.finishedAttempt.value) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                  controller.revealNonPrizeDoor();
+                                },
+                                child: const Text("Reveal a Door"),
+                              ),
+                            ],
+                            if (controller.isRevealed.value && !controller.finishedAttempt.value) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                  controller.userChangeChoice();
+                                },
+                                child: const Text("Switch Door"),
+                              ),
+                              const SizedBox(height: 10),
+                              ElevatedButton(
+                                onPressed: () {
+                                  controller.finalizeChoice();
+                                },
+                                child: const Text("Finalize Choice"),
+                              ),
+                            ],
+                            if (controller.finishedAttempt.value) ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                  controller.startNewAttempt();
+                                },
+                                child: const Text("Start new attempt"),
+                              ),
+                            ]
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                controller.stopAutopilot = true;
+                              },
+                              child: const Text("Stop autopilot"),
+                            ),
+                          ],
                         ),
-                      ],
-                      if (controller.isRevealed.value && !controller.finishedAttempt.value) ...[
-                        ElevatedButton(
-                          onPressed: () {
-                            controller.userChangeChoice();
-                          },
-                          child: const Text("Switch Door"),
-                        ),
-                        const SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () {
-                            controller.finalizeChoice();
-                          },
-                          child: const Text("Finalize Choice"),
-                        ),
-                      ],
-                      if (controller.finishedAttempt.value)...[
-                        ElevatedButton(
-                          onPressed: () {
-                            controller.startNewAttempt();
-                          },
-                          child: const Text("Start new attempt"),
-                        ),
-                      ]
-                    ],
-                  ),
                 ),
               ),
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Obx(() => Row(
-                  children: [
-                    Expanded(
-                      child: Container(
+                      children: [
+                        Expanded(
+                          child: Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               color: Colors.blueAccent.withOpacity(0.8),
@@ -148,9 +247,9 @@ class Doors extends StatelessWidget {
                               ],
                             ),
                           ),
-                    ),
-                  ],
-                )),
+                        ),
+                      ],
+                    )),
               ),
             ],
           ),
