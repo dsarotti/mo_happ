@@ -60,5 +60,5 @@ If you'd like to contribute or improve the project:
 If it works and is a cool change I will merge it and add your gh page to this section.
 
 ## Contributors
-here's a list of the user that contributed to this project:
+here's a list of the users that contributed to this project:
 - just me D':
