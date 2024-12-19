@@ -83,14 +83,14 @@ class Doors extends StatelessWidget {
                                             () => Slider(
                                               value: controller.autopilotSpeed.value.toDouble(),
                                               min: 10,
-                                              // Velocidad mínima
+                                              // min speed
                                               max: 1500,
-                                              // Velocidad máxima
+                                              // max speed
                                               divisions: 15,
-                                              // Pasos de 100 ms
+                                              // 100 ms steps
                                               label: '${controller.autopilotSpeed.value} ms',
                                               onChanged: (value) {
-                                                controller.autopilotSpeed.value = value.toInt(); // Actualizar el valor local del Slider
+                                                controller.autopilotSpeed.value = value.toInt(); // update local slider value
                                               },
                                             ),
                                           ),

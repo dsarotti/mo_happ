@@ -80,7 +80,7 @@ class DoorButton extends StatelessWidget {
                             color: (controller.isRevealed.value && doorNumber == controller.revealedDoor.value) ? Colors.red : Colors.brown[400],
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
-                              color: controller.userChoice.value == doorNumber ? Colors.green : Colors.black.withOpacity(0.6), // Verde si seleccionada
+                              color: controller.userChoice.value == doorNumber ? Colors.green : Colors.black.withOpacity(0.6), // green if it's selected
                               width: 2,
                             ),
                           ),
@@ -90,7 +90,7 @@ class DoorButton extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: controller.isRevealed.value ? Colors.white : Colors.black, // Texto blanco si está revelada
+                                color: controller.isRevealed.value ? Colors.white : Colors.black, // wite text if the door is revealed
                               ),
                             ),
                           ),

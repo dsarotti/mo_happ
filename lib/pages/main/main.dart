@@ -10,7 +10,7 @@ class Main extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Fondo degradado
+          // Gradient background
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -20,7 +20,7 @@ class Main extends StatelessWidget {
               ),
             ),
           ),
-          // Contenido principal
+          // Main content
           Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -28,7 +28,6 @@ class Main extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Contenedor de texto
                   Container(
                     padding: const EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
@@ -109,7 +108,7 @@ class Main extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // Botón para simulación
+                  // Go to simulation button
                   ElevatedButton(
                     onPressed: () => Get.toNamed(Routes.doors),
                     style: ElevatedButton.styleFrom(
