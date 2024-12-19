@@ -34,6 +34,7 @@ _Later_
 ## Why I Made This App
 
 The Monty Hall problem is a classic example of how human intuition can sometimes fail in the face of probability. I wanted to create a tool that anyone can use to experiment with this problem and see the results for themselves. By engaging with the simulation, users can move beyond doubt and fully grasp the statistical reasoning behind switching doors.
+Also i'm uneployed at the moment and making silly things like this helps me keep active.
 
 ## How to Run the App
 
@@ -57,3 +58,7 @@ If you'd like to contribute or improve the project:
 5. Submit a pull request with a clear explanation of your updates.
 
 If it works and is a cool change I will merge it and add your gh page to this section.
+
+## Contributors
+here's a list of the user that contributed to this project:
+- just me D':
