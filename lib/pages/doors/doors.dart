@@ -231,7 +231,10 @@ class Doors extends StatelessWidget {
                                 controller.stopAutopilot = true;
                               },
                               style: ButtonStyles.smallButtonStyle,
-                              child: const Text("Stop autopilot"),
+                              child: const Text(
+                                "Stop autopilot",
+                                style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                              ),
                             ),
                           ],
                         ),
