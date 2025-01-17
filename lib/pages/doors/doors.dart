@@ -114,6 +114,7 @@ class Doors extends StatelessWidget {
                                                   style: ButtonStyle(
                                                     backgroundColor:
                                                         WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.blue : Colors.white),
+                                                    //The foreground color will control the color of the text
                                                     foregroundColor:
                                                         WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.white : Colors.blue),
                                                   ),
@@ -137,6 +138,7 @@ class Doors extends StatelessWidget {
                                                     backgroundColor: WidgetStateProperty.all<Color>(
                                                       controller.autopilotChoice.value ? Colors.white : Colors.blue,
                                                     ),
+                                                    //The foreground color will control the color of the text
                                                     foregroundColor: WidgetStateProperty.all<Color>(
                                                       controller.autopilotChoice.value ? Colors.blue : Colors.white,
                                                     ),
