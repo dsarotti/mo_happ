@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mo_happ/routes/routes.dart';
+import 'package:mo_happ/styles/button_styles.dart';
 
 class Main extends StatelessWidget {
   const Main({super.key});
@@ -33,8 +34,8 @@ class Main extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16.0),
-                      boxShadow: [
-                        const BoxShadow(
+                      boxShadow: const [
+                        BoxShadow(
                           color: Colors.black26,
                           blurRadius: 10.0,
                           offset: Offset(0, 4),
@@ -111,16 +112,10 @@ class Main extends StatelessWidget {
                   // Go to simulation button
                   ElevatedButton(
                     onPressed: () => Get.toNamed(Routes.doors),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
+                    style: ButtonStyles.bigButtonStyle,
                     child: const Text(
                       'Start Simulation',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: TextStyle(fontSize: 18, color: Colors.blueAccent),
                     ),
                   ),
                 ],

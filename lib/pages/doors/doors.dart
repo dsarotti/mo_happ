@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mo_happ/pages/doors/controller/doors_controller.dart';
+import 'package:mo_happ/styles/button_styles.dart';
 
 import 'widgets/door_button.dart';
 
@@ -70,6 +71,7 @@ class Doors extends StatelessWidget {
                                 onPressed: () {
                                   Get.dialog(
                                     AlertDialog(
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                                       title: const Text('Settings'),
                                       content: Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -107,16 +109,21 @@ class Doors extends StatelessWidget {
                                                   onPressed: () {
                                                     controller.autopilotChoice.value = true;
                                                   },
+                                                  //This style's color depends on the current value of the observable boolean DoorsController.autopilotChoice.value
+                                                  //turns the buttons into switches
                                                   style: ButtonStyle(
                                                     backgroundColor:
                                                         WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.blue : Colors.white),
+                                                    //The foreground color will control the color of the text
                                                     foregroundColor:
                                                         WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.white : Colors.blue),
                                                   ),
-                                                  child: const Text('Switch'),
+                                                  child: const Text(
+                                                    'Switch',
+                                                  ),
                                                 );
                                               }),
-                                              Expanded(
+                                              const Expanded(
                                                 child: SizedBox(),
                                               ),
                                               Obx(() {
@@ -125,13 +132,20 @@ class Doors extends StatelessWidget {
                                                   onPressed: () {
                                                     controller.autopilotChoice.value = false;
                                                   },
+                                                  //This style's color depends on the current value of the observable boolean DoorsController.autopilotChoice.value
+                                                  //turns the buttons into switches
                                                   style: ButtonStyle(
-                                                    backgroundColor:
-                                                        WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.white : Colors.blue),
-                                                    foregroundColor:
-                                                        WidgetStateProperty.all<Color>(controller.autopilotChoice.value ? Colors.blue : Colors.white),
+                                                    backgroundColor: WidgetStateProperty.all<Color>(
+                                                      controller.autopilotChoice.value ? Colors.white : Colors.blue,
+                                                    ),
+                                                    //The foreground color will control the color of the text
+                                                    foregroundColor: WidgetStateProperty.all<Color>(
+                                                      controller.autopilotChoice.value ? Colors.blue : Colors.white,
+                                                    ),
                                                   ),
-                                                  child: const Text("Don't switch"),
+                                                  child: const Text(
+                                                    "Don't switch",
+                                                  ),
                                                 );
                                               }),
                                             ],
@@ -144,13 +158,21 @@ class Doors extends StatelessWidget {
                                             controller.startAutopilot();
                                             Get.back();
                                           },
-                                          child: const Text('Accept'),
+                                          style: ButtonStyles.smallButtonStyle,
+                                          child: const Text(
+                                            'Accept',
+                                            style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                                          ),
                                         ),
                                       ],
                                     ),
                                   );
                                 },
-                                child: const Text("start autopilot"),
+                                style: ButtonStyles.smallButtonStyle,
+                                child: const Text(
+                                  "start autopilot",
+                                  style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                                ),
                               ),
                             ],
                             if (controller.userChoice.value != 0 && !controller.isRevealed.value && !controller.finishedAttempt.value) ...[
@@ -158,7 +180,11 @@ class Doors extends StatelessWidget {
                                 onPressed: () {
                                   controller.revealNonPrizeDoor();
                                 },
-                                child: const Text("Reveal a Door"),
+                                style: ButtonStyles.smallButtonStyle,
+                                child: const Text(
+                                  "Reveal a Door",
+                                  style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                                ),
                               ),
                             ],
                             if (controller.isRevealed.value && !controller.finishedAttempt.value) ...[
@@ -166,14 +192,22 @@ class Doors extends StatelessWidget {
                                 onPressed: () {
                                   controller.userChangeChoice();
                                 },
-                                child: const Text("Switch Door"),
+                                style: ButtonStyles.smallButtonStyle,
+                                child: const Text(
+                                  "Switch Door",
+                                  style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                                ),
                               ),
                               const SizedBox(height: 10),
                               ElevatedButton(
                                 onPressed: () {
                                   controller.finalizeChoice();
                                 },
-                                child: const Text("Finalize Choice"),
+                                style: ButtonStyles.smallButtonStyle,
+                                child: const Text(
+                                  "Finalize Choice",
+                                  style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                                ),
                               ),
                             ],
                             if (controller.finishedAttempt.value) ...[
@@ -181,7 +215,11 @@ class Doors extends StatelessWidget {
                                 onPressed: () {
                                   controller.startNewAttempt();
                                 },
-                                child: const Text("Start new attempt"),
+                                style: ButtonStyles.smallButtonStyle,
+                                child: const Text(
+                                  "Start new attempt",
+                                  style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                                ),
                               ),
                             ]
                           ],
@@ -192,7 +230,11 @@ class Doors extends StatelessWidget {
                               onPressed: () {
                                 controller.stopAutopilot = true;
                               },
-                              child: const Text("Stop autopilot"),
+                              style: ButtonStyles.smallButtonStyle,
+                              child: const Text(
+                                "Stop autopilot",
+                                style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                              ),
                             ),
                           ],
                         ),
@@ -209,8 +251,8 @@ class Doors extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: Colors.blueAccent.withOpacity(0.8),
                               borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                const BoxShadow(
+                              boxShadow: const [
+                                BoxShadow(
                                   color: Colors.black26,
                                   blurRadius: 8.0,
                                   offset: Offset(0, 4),
